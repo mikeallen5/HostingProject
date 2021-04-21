@@ -5,7 +5,7 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 
 # CloudFront for SSL, CDN and WAF
 resource "aws_cloudfront_distribution" "website" {
-  aliases =  ["${var.acm_domain_name}"]
+  aliases =  [var.acm_domain_name]
 
   // origin is where CloudFront gets it's content from
   origin {
