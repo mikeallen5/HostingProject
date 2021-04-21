@@ -1,4 +1,4 @@
-# Cloudfront OAI, for restricting access to the S3 bucket to only allow access from CloudFront
+# Cloudfront OAI, for restricting access to the S3 bucket to only allow access from CloudFront 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
   comment = "OAI for static website"
 }
