@@ -16,8 +16,6 @@ provider "aws" {
   region  = "eu-west-1"
 }
 
-
-
 module "static_hosting" {
   source = "../../modules/static_hosting"
 
