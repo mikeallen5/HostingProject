@@ -11,5 +11,5 @@ resource "aws_s3_bucket_object" "html" {
   key          = "index.html"
   source       = "${path.module}/dist/index.html"
   content_type = "text/html"
-  etag = "${filemd5("${path.module}/dist/index.html")}"
+  etag         = filemd5("${path.module}/dist/index.html")
 }
