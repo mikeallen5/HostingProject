@@ -4,12 +4,19 @@ terraform {
     key    = "static_hosting/terraform.tfstate"
     region = "eu-west-1"
   }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.37.0"
+    }
+  }
 }
- 
+
 provider "aws" {
-  version = "3.37.0"
   region  = "eu-west-1"
 }
+
+
 
 module "static_hosting" {
   source = "../../modules/static_hosting"
