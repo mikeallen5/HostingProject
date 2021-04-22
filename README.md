@@ -30,6 +30,6 @@ On a commit to the terraform/* directory, the terraform code will automatically 
 
 ## Further Information
 For more information about this project please see the following files:
-AWS Architecture Diagram.png
-Solution Overview.pdf
-terraform/modules/static_hosting/README.md
+- AWS Architecture Diagram.png
+- Solution Overview.pdf
+- terraform/modules/static_hosting/README.md
