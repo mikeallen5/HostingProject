@@ -1,7 +1,7 @@
 # Configure an AWS WAF ruleset that uses AWS Managed rules to mitigate against common OWASP Top 10 Vulnerabilities:
 # https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-list.html
 resource "aws_wafv2_web_acl" "website" {
-  provider = aws.us-east-1
+  provider    = aws.us-east-1
   name        = "aws-managed-rules"
   description = "AWS Managed Rules"
   scope       = "CLOUDFRONT"

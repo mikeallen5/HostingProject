@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_dashboard" "main" {
-  provider = aws.us-east-1
+  provider       = aws.us-east-1
   dashboard_name = replace(var.acm_domain_name, ".", "-")
 
   dashboard_body = <<EOF
@@ -98,57 +98,57 @@ resource "aws_cloudwatch_dashboard" "main" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "cloudfront_error_rate" {
-  provider = aws.us-east-1
-  alarm_name                = "${replace(var.acm_domain_name, ".", "-")}-cf-error-rate"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
-  evaluation_periods        = "2"
-  metric_name               = "TotalErrorRate"
-  namespace                 = "AWS/CloudFront"
+  provider            = aws.us-east-1
+  alarm_name          = "${replace(var.acm_domain_name, ".", "-")}-cf-error-rate"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "TotalErrorRate"
+  namespace           = "AWS/CloudFront"
   dimensions = {
-    "Region" = "Global",
+    "Region"         = "Global",
     "DistributionId" = aws_cloudfront_distribution.website.id
   }
 
-  period                    = "120"
-  statistic                 = "Average"
-  threshold                 = "25"
-  alarm_description         = "This metric monitors CloudFront error rates"
-  alarm_actions             = [aws_sns_topic.website.arn]
+  period            = "120"
+  statistic         = "Average"
+  threshold         = "25"
+  alarm_description = "This metric monitors CloudFront error rates"
+  alarm_actions     = [aws_sns_topic.website.arn]
 }
 
 resource "aws_cloudwatch_metric_alarm" "waf_blocked_rate" {
-  provider = aws.us-east-1
-  alarm_name                = "${replace(var.acm_domain_name, ".", "-")}-waf-blocked-rate"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
-  evaluation_periods        = "2"
-  metric_name               = "BlockedRequests"
-  namespace                 = "AWS/WAFV2"
+  provider            = aws.us-east-1
+  alarm_name          = "${replace(var.acm_domain_name, ".", "-")}-waf-blocked-rate"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "BlockedRequests"
+  namespace           = "AWS/WAFV2"
   dimensions = {
     "WebACL" = "${aws_wafv2_web_acl.website.name}",
-    "Rule" = "ALL" 
+    "Rule"   = "ALL"
   }
 
-  period                    = "120"
-  statistic                 = "Average"
-  threshold                 = "25"
-  alarm_description         = "This metric monitors WAF blocked request rates"
-  alarm_actions             = [aws_sns_topic.website.arn]
+  period            = "120"
+  statistic         = "Average"
+  threshold         = "25"
+  alarm_description = "This metric monitors WAF blocked request rates"
+  alarm_actions     = [aws_sns_topic.website.arn]
 }
 
 resource "aws_cloudwatch_metric_alarm" "acm_expiry_days" {
-  provider = aws.us-east-1
-  alarm_name                = "${replace(var.acm_domain_name, ".", "-")}-acm-expiry-days"
-  comparison_operator       = "LessThanOrEqualToThreshold"
-  evaluation_periods        = "2"
-  metric_name               = "DaysToExpiry"
-  namespace                 = "AWS/CertificateManager"
+  provider            = aws.us-east-1
+  alarm_name          = "${replace(var.acm_domain_name, ".", "-")}-acm-expiry-days"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "DaysToExpiry"
+  namespace           = "AWS/CertificateManager"
   dimensions = {
     CertificateArn = aws_acm_certificate_validation.website.certificate_arn
   }
 
-  period                    = "120"
-  statistic                 = "Average"
-  threshold                 = "25"
-  alarm_description         = "This metric monitors days to ACM certificate expiry"
-  alarm_actions             = [aws_sns_topic.website.arn]
+  period            = "120"
+  statistic         = "Average"
+  threshold         = "25"
+  alarm_description = "This metric monitors days to ACM certificate expiry"
+  alarm_actions     = [aws_sns_topic.website.arn]
 }

@@ -1,10 +1,10 @@
 resource "aws_acm_certificate" "website" {
-  provider = aws.us-east-1
-  domain_name       =  var.acm_domain_name
+  provider          = aws.us-east-1
+  domain_name       = var.acm_domain_name
   validation_method = "DNS"
-  tags = var.tags
+  tags              = var.tags
 }
- 
+
 data "aws_route53_zone" "website" {
   name         = var.r53_domain_name
   private_zone = false
@@ -30,7 +30,7 @@ resource "aws_route53_record" "website" {
 
 # Wait for the ACM Certificate to be created before using it in CloudFront
 resource "aws_acm_certificate_validation" "website" {
-  provider = aws.us-east-1
+  provider                = aws.us-east-1
   certificate_arn         = aws_acm_certificate.website.arn
   validation_record_fqdns = [for record in aws_route53_record.website : record.fqdn]
 }

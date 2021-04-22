@@ -1,8 +1,8 @@
 # Create ALIAS record for CloudFront Distribution
 resource "aws_route53_record" "website_cloudfront" {
-  name            = var.acm_domain_name
-  type            = "A"
-  zone_id         = data.aws_route53_zone.website.zone_id
+  name    = var.acm_domain_name
+  type    = "A"
+  zone_id = data.aws_route53_zone.website.zone_id
 
   alias {
     name                   = aws_cloudfront_distribution.website.domain_name
