@@ -4,7 +4,7 @@ resource "aws_acm_certificate" "website" {
   validation_method = "DNS"
   tags = var.tags
 }
-
+ 
 data "aws_route53_zone" "website" {
   name         = var.r53_domain_name
   private_zone = false
