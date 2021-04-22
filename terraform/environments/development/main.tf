@@ -19,12 +19,15 @@ provider "aws" {
 module "static_hosting" {
   source = "../../modules/static_hosting"
 
-  aws_region = "eu-west-1"
-
+  aws_region          = "eu-west-1"
   website_bucket_name = "static-hosting-project-website"
+  acm_domain_name     = "staticwebsite.permacrypt.com"
+  r53_domain_name     = "permacrypt.com"
 
-  acm_domain_name = "staticwebsite.permacrypt.com"
-
-  r53_domain_name = "permacrypt.com"
+  tags = {
+    BUILT_BY    = "TERRAFORM"
+    ENVIRONMENT = "DEVELOPMENT"
+    OWNER       = "MICHAEL"
+  }
 
 }

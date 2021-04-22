@@ -26,15 +26,16 @@ resource "aws_wafv2_web_acl" "website" {
     }
 
     visibility_config {
-      cloudwatch_metrics_enabled = false
-      metric_name                = "friendly-rule-metric-name"
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWS-managed-waf-ruleset"
       sampled_requests_enabled   = false
     }
   }
 
   visibility_config {
-    cloudwatch_metrics_enabled = false
-    metric_name                = "friendly-metric-name"
+    cloudwatch_metrics_enabled = true
+    metric_name                = "AWS-managed-waf-acl"
     sampled_requests_enabled   = false
   }
+  tags = var.tags
 }

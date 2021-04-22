@@ -13,3 +13,7 @@ variable "acm_domain_name" {
 variable "r53_domain_name" {
   description = "The domain name to create r53 dns records in"
 }
+
+variable "tags" {
+  description = "Tags to apply to all AWS resource created by this module"
+}

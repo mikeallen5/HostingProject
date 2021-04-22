@@ -2,6 +2,7 @@ resource "aws_acm_certificate" "website" {
   provider = aws.us-east-1
   domain_name       =  var.acm_domain_name
   validation_method = "DNS"
+  tags = var.tags
 }
 
 data "aws_route53_zone" "website" {
